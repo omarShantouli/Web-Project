@@ -1,0 +1,27 @@
+﻿
+@model Student
+
+<div class="text-center mt-5">
+
+    <div class="text-danger">
+        @ViewBag.fillError
+    </div>
+
+    <form asp-controller="Login" asp-action="CheckLogin" method="post">
+        <label asp-for="Email">Email</label> 
+        <br />
+        <input class="w-25" asp-for="Email" type="email" required/>
+
+        <br />
+
+        <label asp-for="Password" >Password</label>
+        <br />
+        <input class="w-25" asp-for="Password" type="password" required/>
+        <br />
+
+        <button class="btn btn-primary mt-3 w-25" type="submit" > Login </button>
+        <br />
+        <a  class="mt-2" asp-asp-controller="Login" asp-action="SignUp">Register</a>
+    </form>
+
+</div>
