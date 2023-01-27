@@ -1,7 +1,12 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Login";
+    ViewData["Subtitle"] = "School Portal";
+    ViewData["PageOne"] = "Login";
+    ViewData["PageTwo"] = "SignUp";
+}
 @model Student
 
-<div class="text-center mt-5">
+<div class="text-center mt-5 border bg-light">
 
     <div class="text-danger">
         @ViewBag.fillError
@@ -21,7 +26,7 @@
 
         <button class="btn btn-primary mt-3 w-25" type="submit" > Login </button>
         <br />
-        <a  class="mt-2" asp-asp-controller="Login" asp-action="SignUp">Register</a>
+        <a  class="mt-2" asp-asp-controller="Login" asp-action="SignUp">Don't have an account signUp</a>
     </form>
 
 </div>
