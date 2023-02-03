@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Assignments" ;
+    ViewData["Subtitle"] = ViewBag.name;
+    ViewData["PageOne"] = "Logout";
+    ViewData["Action"] = "Logout";
+}
+
+<div class="text-center" style="margin-top: 100px;">
+    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Assignment Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Submitting Time</th>
+                <th scope="col">Max Score</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Section Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+                foreach (Dictionary<string, dynamic> x in ViewBag.assignments)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td scope="row">@x["assignmentName"]</td>
+                        <td>@x["assignmentDesc"]</td>
+                        <td>@x["assignmentSub"]</td>
+                        <td>@x["assignmentMaxScore"]</td>
+                        <td>@x["courseName"]</td>
+                        <td>@x["sectionName"]</td>
+                    </tr>
+
+                    i++;
+                }
+            }
+        </tbody>
+     </table>
+    <div style="text-align:left; margin-left: 13px">
+         <a asp-controller="Home" asp-action="Index" style="text-decoration:none;">Back</a>
+     </div>
+    
+
+</div>
+
+

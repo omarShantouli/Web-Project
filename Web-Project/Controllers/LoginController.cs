@@ -1,6 +1,7 @@
 ﻿using khalil_testing.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Web_Project.Models;
@@ -13,6 +14,7 @@ namespace Web_Project.Controllers
         private readonly MyContext context;
         public LoginController(MyContext c)
         {
+            
             context = c;
         }
 
@@ -20,6 +22,14 @@ namespace Web_Project.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+
+            HttpContext.Session.Clear();
+            ViewBag.assignments = null;
+            return RedirectToAction("Index", "Login");
         }
 
 
@@ -43,13 +53,16 @@ namespace Web_Project.Controllers
                     if (student.Password.Equals(s.Password))
                     {
                         HttpContext.Session.SetInt32("StudentId", s.Id);
+                        ViewBag.name = s.Name;
                         return RedirectToAction("Index", "Home");
                     }
                 }
             }
 
-            string message = "an error occured!";
-            ViewBag.fillError = message;
+            string message = "The email address or password is incorrect. Please retry...";
+            ViewBag.Error = message;
+
+             
             return View("Index");
         }
 
@@ -71,8 +84,8 @@ namespace Web_Project.Controllers
                     return View("SignUp");
                 }
             }
-            
-            Student StudentToAdd = new Student { Name = student.Name, Email = student.Email, Password = student.Password, SectionId = student.SectionId };
+
+            Student StudentToAdd = new Student { Name = student.Name, Email = student.Email, Password = student.Password };
             context.students.Add(StudentToAdd);
             context.SaveChanges();
             HttpContext.Session.SetInt32("StudentId", StudentToAdd.Id);

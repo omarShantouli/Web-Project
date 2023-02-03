@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public string CourseName { get; set; }
+        public string AssignmentName { get; set; }
 
         public string Description { get;set; }
 

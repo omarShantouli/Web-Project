@@ -3,30 +3,29 @@
     ViewData["Subtitle"] = "School Portal";
     ViewData["PageOne"] = "Login";
     ViewData["PageTwo"] = "SignUp";
+    ViewData["Action"] = "Index";
 }
 @model Student
 
-<div class="text-center mt-5 border bg-light">
+<div class="text-center  p-5 mb-5" style="width:35%; margin-left: 30%; background-color: #EDEDED; border-radius: 5%;margin-top: 100px;">
 
     <div class="text-danger">
-        @ViewBag.fillError
+        @ViewBag.Error
     </div>
 
     <form asp-controller="Login" asp-action="CheckLogin" method="post">
-        <label asp-for="Email">Email</label> 
-        <br />
-        <input class="w-25" asp-for="Email" type="email" required/>
 
-        <br />
-
-        <label asp-for="Password" >Password</label>
-        <br />
-        <input class="w-25" asp-for="Password" type="password" required/>
+        <input class="w-100 form-control" asp-for="Email" type="email" required placeholder="Email address" />
+     
         <br />
 
-        <button class="btn btn-primary mt-3 w-25" type="submit" > Login </button>
+        <input class="w-100 form-control" asp-for="Password" type="password" required placeholder="Password"/>
         <br />
-        <a  class="mt-2" asp-asp-controller="Login" asp-action="SignUp">Don't have an account signUp</a>
+
+        <button class="btn btn-dark mt-3 w-100 mb-3" type="submit"> Login </button>
+        <br />
+        <a  class="mt-2 text-dark" asp-asp-controller="Login" style="text-decoration: none;" asp-action="SignUp">Don't have an account signUp</a>
     </form>
+    
 
 </div>

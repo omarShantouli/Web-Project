@@ -1,41 +1,57 @@
 ﻿@{
-    ViewData["Title"] = ViewBag.student.Name ;
-    ViewData["Subtitle"] = ViewBag.student.Name ;
+    ViewData["Title"] = "Home";
+    ViewData["Subtitle"] = ViewBag.name;
     ViewData["PageOne"] = "Logout";
+    ViewData["Action"] = "Logout";
+    ViewData["a"] = "Assginments";
 }
 
-<div class="text-center">
-    
+<div class="text-center" style="margin-top: 100px;">
+    @if (ViewBag.courses.Count == 0)
+    {
+        <div class="m-5 h3" style="color: grey">
+            There are no courses yet...
+        </div>
+
+        <img src="~/images/undraw_add_notes_re_ln36.png" width="500" hight="500" class="rounded-circle" alt="">
+
+    }
+    else
+    {
+        
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Course Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Submiting Time</th>
-                <th scope="col">Max Score</th>
+                <th scope="col">Hours</th>
                 <th scope="col">Section Name</th>
+                <th scope="col">Days</th>
             </tr>
         </thead>
         <tbody>
             @{
                 int i = 1;
-                foreach(Assignments assignment in ViewBag.assignments)
+               foreach (Dictionary<string, dynamic> x in ViewBag.courses)
                 {
                     <tr>
                         <th scope="row">@i</th>
-                        <th scope="row">@assignment.CourseName</th>
-                        <td>@assignment.Description</td>
-                        <td>@assignment.SubmitingTime</td>
-                        <td>@assignment.MaxScore</td>
-                        <td>@ViewBag.sections[@assignment.SecionId]</td>
+                        <th scope="row">@x["courseName"]</th>
+                        <td>@x["courseHour"]</td>
+                        <td>@x["sectionName"]</td>
+                        <td>@x["days"]</td>
+                        
                     </tr>
-                    
+
                     i++;
                 }
             }
         </tbody>
      </table> 
-
+  
+     }
 
 </div>
+
+
+

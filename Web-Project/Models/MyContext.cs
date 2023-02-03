@@ -14,5 +14,10 @@ namespace khalil_testing.Models
 
         public DbSet<Section> sections { set; get; }
 
+        public DbSet<Course> course { set; get; }
+
+        public DbSet<StudentSection> studentsSection { set; get; }
+
+
     }
 }
