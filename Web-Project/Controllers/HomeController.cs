@@ -55,6 +55,7 @@ namespace Web_Project.Controllers
                 temp["courseHour"] = cour.Hours;
                 temp["sectionName"] = s.Name;
                 temp["days"] = s.Days;
+                temp["sectionId"] = s.Id;
                 courses.Add(temp);
             }
 
@@ -165,13 +166,24 @@ namespace Web_Project.Controllers
             return RedirectToAction("Admin", "Home");
         }
 
-        [HttpPost]
-        public IActionResult Delete()
+        
+        public IActionResult Delete(int id)
         {
-            
-            Course course = context.course.Where(c => c.Name == "Algorithm").ToList().First();
-            context.course.Remove(course);
+
+
+            //Course course = context.course.Where(c => c.sec == name).ToList().First();
+            //context.course.Remove(course);
+            //context.SaveChanges();
+            List< StudentSection> studentSection = context.studentsSection.Where(s => s.SectionId== id).ToList();
+            foreach(StudentSection s in studentSection)
+            {
+                context.studentsSection.Remove(s);
+                context.SaveChanges();
+            }
+            Section sec = context.sections.Where(s => s.Id == id).ToList().First();
+            context.sections.Remove(sec);
             context.SaveChanges();
+
             return RedirectToAction("Admin", "Home");
         }
         public IActionResult Privacy()

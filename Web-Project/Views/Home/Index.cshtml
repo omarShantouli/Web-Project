@@ -52,10 +52,8 @@
                         <td>@x["days"]</td>
                             @if (ViewBag.admin == 1)
                             {
-                                <form asp-asp-controller="Home" asp-action="Delete" method="post">
-                                    <input hidden value=x["courseName"] asp-for="name" />
-                                <td><button type="submit" class="text-danger btn h2">delete</button></td>
-                                </form>
+                               
+                                <td><a class="text-danger" style="text-decoration: none" asp-controller="Home" asp-action="Delete" asp-route-id='@x["sectionId"]'>delete</a></td>
                                 
                             }
                     </tr>
