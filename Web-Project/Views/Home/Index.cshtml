@@ -1,10 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home";
-    ViewData["Subtitle"] = ViewBag.name;
+    ViewData["Subtitle"] = ViewBag.admin == 1 ? "Admin" : ViewBag.name;
     ViewData["PageOne"] = "Logout";
     ViewData["Action"] = "Logout";
+    if (ViewBag.courses.Count == 0 || ViewBag.admin == 1)
+        ViewData["a"] = "";
+    else
     ViewData["a"] = "Assginments";
+
 }
+
 
 <div class="text-center" style="margin-top: 100px;">
     @if (ViewBag.courses.Count == 0)
@@ -27,6 +32,11 @@
                 <th scope="col">Hours</th>
                 <th scope="col">Section Name</th>
                 <th scope="col">Days</th>
+                
+                @if(ViewBag.admin == 1)
+                {
+                   <th scope="col"></th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -40,18 +50,35 @@
                         <td>@x["courseHour"]</td>
                         <td>@x["sectionName"]</td>
                         <td>@x["days"]</td>
-                        
+                            @if (ViewBag.admin == 1)
+                            {
+                                <form asp-asp-controller="Home" asp-action="Delete" method="post">
+                                    <input hidden value=x["courseName"] asp-for="name" />
+                                <td><button type="submit" class="text-danger btn h2">delete</button></td>
+                                </form>
+                                
+                            }
                     </tr>
 
                     i++;
                 }
             }
         </tbody>
-     </table> 
-  
+        </table>
+
+        if(ViewBag.admin == 1)
+        {
+            <div style="text-align:left; margin-left: 13px">
+                <a asp-controller="Home" asp-action="ViewForm" style="text-decoration: none;">add</a>
+            </div>
+        }
+        
      }
 
 </div>
 
-
-
+<script type = "text/javascript" >  
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null };  
+</script> 

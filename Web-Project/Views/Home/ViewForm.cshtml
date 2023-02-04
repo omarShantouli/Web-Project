@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Adding Courses";
+    ViewData["Subtitle"] = "Admin";
+    ViewData["PageOne"] = "Logout";
+    ViewData["Action"] = "Logout";
+   
+
+}
+
+@model Course
+
+<div class="text-center" style="margin-top: 100px;" >
+    <div class="text-center  p-5 mb-5" style="width:35%; margin-left: 30%; border-radius: 5%;margin-top: 100px;">
+        <form asp-controller="Home" asp-action="addCourse" method="post">
+           
+            <input placeholder="Course Name" required class="form-control" type="text" asp-for="Name">
+            <br>
+         
+            <input placeholder="Hours" required class="form-control" type="number" asp-for="Hours">
+            <br>
+            <button class="btn btn-dark" type="submit">Add Course</button>
+        </form>
+        <a asp-controller="Home" asp-action="Admin" class="btn btn-block">Cancel</a>
+    </div>
+</div>

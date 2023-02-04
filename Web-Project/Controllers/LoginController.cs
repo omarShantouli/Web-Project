@@ -1,9 +1,14 @@
 ﻿using khalil_testing.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Web_Project.Models;
 
 namespace Web_Project.Controllers
@@ -26,11 +31,11 @@ namespace Web_Project.Controllers
 
         public IActionResult Logout()
         {
-
+        
             HttpContext.Session.Clear();
-            ViewBag.assignments = null;
             return RedirectToAction("Index", "Login");
         }
+       
 
 
         public IActionResult SignUp()
@@ -46,6 +51,19 @@ namespace Web_Project.Controllers
 
 
             List<Student> students = context.students.ToList();
+            
+            if (student.Email.Equals("admin@gmail.com"))
+            {
+                if (student.Password.Equals("1111"))
+                {
+                    Student admin = context.students.Where(s => s.Email.Equals("admin@gmail.com")).ToList().First();
+                    HttpContext.Session.SetInt32("StudentId", admin.Id);
+                    ViewBag.name = "admin";
+                    return RedirectToAction("Admin", "Home");
+                }
+            }
+
+
             foreach (Student s in students)
             {
                 if (student.Email.Equals(s.Email))
@@ -90,10 +108,8 @@ namespace Web_Project.Controllers
             context.SaveChanges();
             HttpContext.Session.SetInt32("StudentId", StudentToAdd.Id);
             return RedirectToAction("Index", "Home");
-
-
-           
             
         }
+
     }
 }

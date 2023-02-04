@@ -50,11 +50,13 @@ namespace Web_Project.Models
             Student student2 = new Student { Name = "Jameel Sawafta", Email = "jameel@gmail.com", Password = "0000"};
             Student student3 = new Student { Name = "Ahmed Ghannam", Email = "ahmed@gmail.com", Password = "0000"};
             Student student4 = new Student { Name = "Abeer Saqf-al-hayt", Email = "abeer@gmail.com", Password = "0000"};
+            Student admin = new Student { Name = "admin", Email = "admin@gmail.com", Password = "1111"};
 
             context.students.Add(student1);
             context.students.Add(student2);
             context.students.Add(student3);
             context.students.Add(student4);
+            context.students.Add(admin);
             context.SaveChanges();
 
             StudentSection[] studentSection1 = new StudentSection[]
